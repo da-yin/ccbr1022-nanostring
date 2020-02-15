@@ -61,8 +61,8 @@ long_Y_nph = melt(Y_nph, value.name = "normalized_Counts", varnames=c('gene', 's
 long_Y_nph$cytopenia = str_sub(long_Y_nph$sample, -4,-1)
 long_Y_nph$cytopenia=as.factor(long_Y_nph$cytopenia)
 
-#png(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.png")
-pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.pdf")
+jpeg(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.jpeg")
+#pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.pdf")
 ggplot(long_Y_nph, aes(x=sample, y=normalized_Counts, fill=cytopenia)) + geom_boxplot() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylim(0, 300)
 dev.off()
@@ -192,6 +192,7 @@ write.csv(Result_cytopenia.vs.noCytopenia$table, "~/Desktop/active_projects/ccbr
 
 ###########################generate MD plots###############################################################
 
+#examine the fold change vs. expression level of genes
 DEG = Result_cytopenia.vs.noCytopenia$table
 class(DEG)
 DEG$sig = ifelse(abs(DEG$logFC)>1 & DEG$qvalue<0.05, "sig","ns" )
