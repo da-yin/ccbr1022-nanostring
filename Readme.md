@@ -40,11 +40,28 @@ The other class of methods, here used in nanostring data, assumes the total expr
 
 First I plotted the normalized counts for housekeeping genes. These are ten genes provided by Nanostring, and is expected to have stable and similar level of expression across all samples. However it looks like only G6PD, OAZ1 and SDHA have stable expression. Several other genes even have zeros in some of the samples, which is not expected. 
 
-![housekeeping genes](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/housekeepingGenes.png)
+### Figure1 housekeeping genes
+![housekeeping genes](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/housekeeping_normalized.png)
 
+### Figure2 normalized gene counts
 ![normalized gene counts](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/normalizedCounts.png)
 
+### Figure3 normalized gene counts PCA
+![normalized gene counts PCA](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/PCA_normalized_batchCorr.png)
 
-![normalized gene counts PCA](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/normalizedCounts_PCA.png)
+### Figure4 unsupervised clustering of samples based on 200 most variable genes
+![200 most variable genes heatmap](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/Heatmap_normalized_batchcor.png)
+
+### Figure5 MD plot using nanostring provided housekeeping for differential expression
+![MD before](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/MDplot_before.png)
+
+### Figure6 MD plot using DESeq2 selected housekeeping for differential expression
+![MD after](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/MDplot_after.png)
+
+### Figure7 supervised clustering of samples based on DEGs
+![DEGs genes heatmap](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/DEGheatmap_supervised.png)
+
+
+
 
 
