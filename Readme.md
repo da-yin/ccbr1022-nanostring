@@ -1,7 +1,7 @@
 Nanostring RNA data analysis
 =======================
 
-This project is an analysis of Nanostring mRNA data on 8 patients who experienced low blood counts after CAR T-cell therapy.
+This project is an exploratory analysis of Nanostring mRNA data on 8 patients who experienced low blood counts after CAR T-cell therapy.
 
 
 Data source
@@ -35,11 +35,11 @@ This project has a datset with panel of 770 endogenous genes, 10 housekeeping ge
 
 The other class of methods, here used in nanostring data, assumes the total expression level summed over a pre-specified group of genes is approximately the same across all the samples.The control-based normalization often uses RNA from a group of internal control genes (e.g., housekeeping genes) and external spike-in RNA (positive and negative genes). The accuracy and reliability of gene expression results are dependent upon the proper normalization of the data against these internal reference genes.
 
-First I plotted the normalized counts for housekeeping genes **Figure1**. These are ten genes provided by Nanostring, and is expected to have stable and similar level of expression across all samples. However it looks like only G6PD, OAZ1 and SDHA have stable expression. Several other genes even have zeros in some of the samples, which is not expected. 
+First I plotted the normalized counts for housekeeping genes **(Figure1)**. These are ten genes provided by Nanostring, and is expected to have stable and similar level of expression across all samples. However it looks like only G6PD, OAZ1 and SDHA have stable expression. Several other genes even have zeros in some of the samples, which is not expected. 
 
-Then I used use the reference genes and normalized the counts **Figure2**. Then I used PCA to show the principal causes of variation in a dataset **Figure3**. Then 200 most variable genes are used to draw heatmap and show unsupervised clustering of samples **Figure4**. MD plot using Nanostring provided housekeeping genes shows that many of the differentilly expressed genes are downregulated (>80%) **Figure5**. 
+Then I used use the reference genes and normalized the counts **(Figure2)**. Then I used PCA to show the principal causes of variation in a dataset **(Figure3)**. Then 200 most variable genes are used to draw heatmap and show unsupervised clustering of samples **(Figure4)**. MD plot using Nanostring provided housekeeping genes shows that many of the differentilly expressed genes are downregulated (>80%) **(Figure5)**. 
 
-I used DESeq2 to calculate differentilly expressed genes between the cytopenia and none-cytopenia samples. Then I selected the genes with the 100th largest P values (most constant genes). Then out of these genes, the ones that have an above median average total counts are selected as new reference housekeeping genes for subsequent NanostringDIff analysis. **Figure6** shows the fold change vs. mean expression. **Figure7** shows the DEGs calcualted using nanostringDiff and new reference genes and clustering heatmap.
+I used DESeq2 to calculate differentilly expressed genes between the cytopenia and none-cytopenia samples. Then I selected the genes with the 100th largest P values (most constant genes). Then out of these genes, the ones that have an above median average total counts are selected as new reference housekeeping genes for subsequent NanostringDIff analysis. **(Figure6)** shows the fold change vs. mean expression. **(Figure7)** shows the DEGs calcualted using nanostringDiff and new reference genes and clustering heatmap.
 
 ### Figure1 housekeeping genes
 ![housekeeping genes](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/housekeeping_normalized.png)
