@@ -1,7 +1,7 @@
 Nanostring RNA data analysis
 =======================
 
-This project is an analysis of Nanostring data on 8 patients who experienced low blood counts after CAR T-cell therapy.
+This project is an analysis of Nanostring mRNA data on 8 patients who experienced low blood counts after CAR T-cell therapy.
 
 
 
@@ -17,6 +17,8 @@ Analysis
 
 The goals of the analysis are:
 
+- test different normalization methods for scaling the nanostring count data.
+- utilize a generalized linear model(GLM) of the negative binomial family to characterize count data.
 - examine Nanostring data from between 2 to 7 time-points for each patient.
 - look for differences in gene expression between different time-points.
 
@@ -32,13 +34,11 @@ Introduction
 
 NanoString technology provides a platform to directly measure mRNA expression without cDNA synthesis and amplification steps.The expression level of a target molecule is measured by counting the number of times the barcode for that molecule is detected by a digital analyzer. The system is sensitive enough to detect low abundance molecules. The NanoString nCounter system also provides more accurate quantifications of mRNA expressions than polymerase chain reaction (PCR)-based methods and microarrays in formalin fixed paraffin embedded samples, where RNA degradation is commonly observed. 
 
-This project has a datset with panel of 770 endogenous genes, 10 housekeeping genes, several positive and negative genes. 
+This project has a datset with panel of 770 endogenous genes, 10 housekeeping genes, several positive and negative genes. For count data, two classes of methods are generally used for normalization. The first one is average-bulk normalization which assumes most genes are not significantly Differentially Expressed (DE) across all the samples. This is commonly used in RNA-seq data normalization such as TMM, UQ, RLE, etc. 
 
+The other class of methods, here used in nanostring data, assumes the total expression level summed over a pre-specified group of genes is approximately the same across all the samples.The control-based normalization often uses RNA from a group of internal control genes (e.g., housekeeping genes) and external spike-in RNA (positive and negative genes). The accuracy and reliability of gene expression results are dependent upon the proper normalization of the data against these internal reference genes.
 
-
-Basically, two classes of methods are available to normalize gene expression data using global normalization factors. They are the control-based normalization and the average-bulk normalization. The former class of methods assumes the total expression level summed over a pre-specified group of genes is approximately the same across all the samples. 
-
-The latter class of methods assumes most genes are not significantly Differentially Expressed (DE) across all the samples. The control-based normalization often uses RNA from a group of internal control genes (e.g., housekeeping genes) or external spike-in RNA [e.g., ERCC RNA (Jiang et al., 2011)], while the average-bulk normalization is more commonly used for their universality. ‘accuracy and reliability of gene expression results are dependent upon the proper normalization of the data against internal reference genes’ (5). Most current normalization methods use spiked-in negative and positive controls and reference (housekeeping) genes, each of which has a good record of effectiveness in related technologies. 
+First I plotted the normalized counts for housekeeping genes. These are ten genes provided by Nanostring, and is expected to have stable and similar level of expression across all samples. However it looks like only G6PD, OAZ1 and SDHA have stable expression. Several other genes even have zeros in some of the samples, which is not expected. 
 
 ![housekeeping genes](https://github.com/da-yin/ccbr1022-nanostring/blob/master/Analysis/Results/housekeepingGenes.png)
 

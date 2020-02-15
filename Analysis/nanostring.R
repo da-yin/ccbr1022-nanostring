@@ -61,7 +61,7 @@ long_Y_nph = melt(Y_nph, value.name = "normalized_Counts", varnames=c('gene', 's
 long_Y_nph$cytopenia = str_sub(long_Y_nph$sample, -4,-1)
 long_Y_nph$cytopenia=as.factor(long_Y_nph$cytopenia)
 
-png(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.png",width=1100, height=1000, res=200)
+png(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.png",width=800, height=700, res=150)
 #pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.pdf")
 ggplot(long_Y_nph, aes(x=sample, y=normalized_Counts, fill=cytopenia)) + geom_boxplot() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylim(0, 300)
@@ -78,7 +78,7 @@ pca_plot = function(data){
            label.size = 3,label.repel=T)
 }
 
-png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts_PCA.png",width=1100, height=1000, res=200)
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts_PCA.png",width=800, height=700, res=150)
 pca_plot(Y_nph)
 dev.off()
 
@@ -102,12 +102,10 @@ PlotHouse = function(gene){
   df_CPK = df$CPK
   ggplot(data = counts_housekeeping_tidy[which(counts_housekeeping_tidy$Name==deparse(substitute(gene))),], 
          aes(x = sample, y=CPK, fill=cytopenia)) + geom_bar(stat="identity")+
-    theme(axis.text.x = element_text(angle = 0, hjust = 1))+ labs(title = deparse(substitute(gene)))+
-    geom_hline(yintercept = mean(df_CPK), color="blue")+geom_hline(yintercept = sd(df_CPK)+mean(df_CPK), color="red")+
-    geom_hline(yintercept =mean(df_CPK)-sd(df_CPK), color="red")
+    theme(axis.text.x = element_text(angle = 0, hjust = 1))+ labs(title = deparse(substitute(gene)))
 }
 
-png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/housekeepingGenes.png",width=1100, height=1000, res=200)
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/housekeepingGenes.png",width=00, height=700, res=150)
 ggarrange(PlotHouse(ABCF1),PlotHouse(G6PD),PlotHouse(NRDE2),PlotHouse(OAZ1),PlotHouse(POLR2A),
           PlotHouse(SDHA),PlotHouse(STK11IP),PlotHouse(TBC1D10B),PlotHouse(TBP),PlotHouse(UBB),
           nrow = 5, ncol = 2)
@@ -203,7 +201,7 @@ normalized_log$ave_log = apply(normalized_log, 1, mean)
 normalized_log$gene = rownames(normalized_log)
 merged = merge(DEG, normalized_log, by="gene")
 
-pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/MDplot.pdf")
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/MDplot_after.png",width=800, height=700, res=150)
 ggplot(merged, aes(x=merged$ave_log, y=merged$logFC, color=merged$sig, ,label=T,repel = TRUE))+ geom_point() + ylim(-40,40)+
   xlab("log mean expression") + ylab("log fold change") + labs(title ="MD plot", col="DEG")+theme(axis.text=element_text(size=12),
                                                                                                   axis.title=element_text(size=14))
@@ -222,7 +220,7 @@ merged2_sig = merged2[which(merged2$sig=="sig"),]
 merged2_sig = merged2_sig[order(merged2_sig$qvalue, decreasing = F),]
 rownames(merged2_sig)=merged2_sig$gene
 merged2_sig_counts = subset(merged2_sig, select=-c(gene,logFC,lr,pvalue,qvalue,sig,ave))
-pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/DEGheatmap.pdf")
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/DEGheatmap.png",width=800, height=700, res=150)
 heatmap.2(data.matrix(merged2_sig_counts),col=rev(morecols(50)),trace="none", 
           main="DEG genes across samples",scale="row",srtCol=45,cexCol=1,cexRow = 0.7)
 dev.off()
