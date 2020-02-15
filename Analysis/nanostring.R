@@ -61,7 +61,7 @@ long_Y_nph = melt(Y_nph, value.name = "normalized_Counts", varnames=c('gene', 's
 long_Y_nph$cytopenia = str_sub(long_Y_nph$sample, -4,-1)
 long_Y_nph$cytopenia=as.factor(long_Y_nph$cytopenia)
 
-jpeg(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.jpeg")
+png(filename = "~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.png",width=1100, height=1000, res=200)
 #pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts.pdf")
 ggplot(long_Y_nph, aes(x=sample, y=normalized_Counts, fill=cytopenia)) + geom_boxplot() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylim(0, 300)
@@ -78,7 +78,7 @@ pca_plot = function(data){
            label.size = 3,label.repel=T)
 }
 
-pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts_PCA.pdf")
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/normalizedCounts_PCA.png",width=1100, height=1000, res=200)
 pca_plot(Y_nph)
 dev.off()
 
@@ -107,7 +107,7 @@ PlotHouse = function(gene){
     geom_hline(yintercept =mean(df_CPK)-sd(df_CPK), color="red")
 }
 
-pdf("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/housekeepingGenes.pdf")
+png("~/Desktop/active_projects/ccbr1022-nanostring/Analysis/Results/housekeepingGenes.png",width=1100, height=1000, res=200)
 ggarrange(PlotHouse(ABCF1),PlotHouse(G6PD),PlotHouse(NRDE2),PlotHouse(OAZ1),PlotHouse(POLR2A),
           PlotHouse(SDHA),PlotHouse(STK11IP),PlotHouse(TBC1D10B),PlotHouse(TBP),PlotHouse(UBB),
           nrow = 5, ncol = 2)
@@ -229,3 +229,4 @@ dev.off()
 
 ##############save Rdata##################
 save.image(file = "nanostring")
+load(file = "nanostring")
